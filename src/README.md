@@ -1,4 +1,5 @@
 # Source code
 
-The detection detection queries are under [SMEAGOL](SMEAGOL) folder.
-The [codeql](codeql) folder holds the required CodeQL dependencies to execute the queries
+TODO fix references
+The detection detection queries are under SMEAGOL folder.
+The codeql folder holds the required CodeQL dependencies to execute the queries
