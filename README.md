@@ -7,5 +7,6 @@ Companion repository of submission "SMEAGOL: MongoDB code smells static detectio
     - [Source code](src/README.md)
     - Detection rules TODO
     - Evaluation data TODO
+    - Example data
     - Replication package TODO
     - Docker container TODO
