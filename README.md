@@ -50,5 +50,5 @@ Before using, you still need to compile your project, so refer to one of the abo
 Once CodeQL is setup and your project compiled, you can open the src folder in this repository.
 Install the [CodeQL extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-codeql) extension and go to the "QL" panel icon.
 In the "Database" section, select "From a folder" and select your compiled project.
-Then, under the "SMEAGOL" folder, right-click on the folder "SMEAGOL" and select "Run Queries in Selected Files". You can also execute individual queries instead of all at once.
+Then, under the "SMEAGOL" folder, right-click on the query you would like to run and select "Run Queries in Selected Files". You can also execute individual queries instead of all at once.
 When the execution is over, you will see a panel with an alert message and hyperlinks to the localizations of the code smells.
