@@ -12,5 +12,6 @@ import utils.queryOperator
 from Operator queryOperator
 where 
     queryOperator.isCaseSensitive() and 
+    isStronglyIndexed(queryOperator.getFullyQualifiedName(), queryOperator.getCollectionName()) and
     not isStronglyIndexedCaseSensitive(queryOperator.getFullyQualifiedName(), queryOperator.getCollectionName())
 select queryOperator, "This query is case sensitive while the defined index is not. Consider setting the index colation right"

@@ -1,5 +1,5 @@
 /**
- * @name Index intersection rather than compound index with weak strong match
+ * @name Index intersection rather than compound index with strong match
  * @description Index intersection lead to worse performance compared to compound indexes with strong index match
  * @kind alert
  * @id indexIntersection
@@ -10,7 +10,7 @@ import utils.filterAttributes
 
 from FindQuery findQuery
 where 
-    count(LeafFilterAttribute attribute | findQuery.getFilter() = attribute.getParent*() | attribute) > 1
+    count(LeafFilterAttribute attribute | findQuery.getFilter() = attribute.getParent*() and not attribute.getFullyQualifiedName().toLowerCase().matches("%id%") | attribute) > 1
     and
     forall(LeafFilterAttribute attribute | findQuery.getFilter() = attribute.getParent*() and not attribute.getFullyQualifiedName().toLowerCase().matches("%id%") | isStronglyIndexed(attribute.getFullyQualifiedName(), findQuery.getCollectionName()))
     and 

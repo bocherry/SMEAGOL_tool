@@ -10,5 +10,6 @@
 
 from File file
 where 
-    count(MongooseSchemaS2 schema | schema.getFile() = file) > 1
+    count(MongooseSchemaS2 schema | schema.getFile() = file
+                                    and exists(schema.getName())) > 1
 select file, "This file has more than one schema. Please use 1 schema per file as it makes it harder to go through your project" 
