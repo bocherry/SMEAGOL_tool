@@ -40,3 +40,15 @@ docker build . -f Dockerfile -t codeql-container</code>
 To compile the project:
 `$ docker run --rm --name codeql-container -v path/to/project:/opt/src -v path/to/directoryDB:/opt/results -e CODEQL_CLI_ARGS="database create -l=javascript /opt/results/source_db -s /opt/src" mcr.microsoft.com/cstsectools/codeql-container `
 where path/to/project is the filepath to your project and path/to/directoryDB is the directory where you want to place the codeql database of you project.
+
+### VS code
+
+There is a [CodeQL extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-codeql) for vs code.
+
+Before using, you still need to compile your project, so refer to one of the above method to install CodeQL and compile your project.
+
+Once CodeQL is setup and your project compiled, you can open the src folder in this repository.
+Install the [CodeQL extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-codeql) extension and go to the "QL" panel icon.
+In the "Database" section, select "From a folder" and select your compiled project.
+Then, under the "SMEAGOL" folder, right-click on the query you would like to run against your project and select "Run Queries in Selected Files".
+When the execution is over, you will see a panel with an alert message and hyperlinks to the localizations of the code smells.
