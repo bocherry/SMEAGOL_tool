@@ -159,7 +159,7 @@ string getTypeInf(Expr expr) {
 }
 
 
-string getDoc(ASTNode expr) {
+string getDoc(AstNode expr) {
     result = expr.(Literal).getValue() + "*type*" + getTypeInf(expr) or
     result = expr.(VarRef).getName() + "*type*" + getTypeInf(expr) or
     result = expr.(InvokeExpr).getCalleeName() + "()" + "*type*" + getTypeInf(expr) or
@@ -178,7 +178,7 @@ string getDoc(ASTNode expr) {
 
 // This construction is ugly but I am yet to find a better way
 
-abstract class MongoAttribute extends ASTNode {
+abstract class MongoAttribute extends AstNode {
     abstract string getFullyQualifiedName();
     abstract string getCollectionName();
     abstract string getAttributeType();
@@ -313,7 +313,7 @@ class LeafDataType extends Expr{
     }
 }
 
-class LeafMongoAttribute extends ASTNode{
+class LeafMongoAttribute extends AstNode{
     abstract string getFullyQualifiedName();
     abstract string getCollectionName();
     abstract string getType();
@@ -450,7 +450,7 @@ class AttributeAccess extends InsertedAttribute, DotExpr {
     }
 
 }
-abstract class MongoIndexDeclaration extends ASTNode {
+abstract class MongoIndexDeclaration extends AstNode {
     abstract string getCollectionName();
     abstract string getAQualifiedIndexName();
     abstract string getQualifiedIndexName();

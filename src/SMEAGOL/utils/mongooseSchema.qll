@@ -25,7 +25,7 @@ class MongooseSchemaS2 extends InvokeExpr {
         this.getCollationStrength() > 2
     }
 }
-ASTNode getDescendant(ASTNode node) {
+AstNode getDescendant(AstNode node) {
     result = node.getAChild() or
     result = getDescendant(node.getAChild())
 }
