@@ -1,4 +1,4 @@
-# SMEAGOL
+# SMEAGOL (SMEll and Antipattern detection for monGOdb appLications)
 
  <img src="SMEAGOL_logo.png" width="50%" />
 
