@@ -50,6 +50,10 @@ To compile the project:
 
 where path/to/project is the filepath to your project and path/to/directoryDB is the directory where you want to place the codeql database of you project.
 
+To run SMEAGOL:
+
+`docker run --rm --name codeql-container -v /path/to/directoryDB:/opt/src -v /path/to/results:/opt/results -v /path/to/smeagol_repository/src/SMEAGOL:/opt/SMEAGOL - v -v /path/to/smeagol_repository/packages:/opt/packages -e CODEQL_CLI_ARGS="database analyze --format=sarifv-latest --additional-packs=/opt/packages --output=/opt/results/SMEAGOL.sarif /opt/SMEAGOL" mcr.microsoft.com/cstsectools/codeql-container`
+
 ### VS code
 
 There is a [CodeQL extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-codeql) for vs code.
