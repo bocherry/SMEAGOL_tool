@@ -32,27 +32,25 @@ You can now open the sarif files, the instances detected lie in the _runs.result
 
 ### Docker
 
-A CodeQL docker [image](https://github.com/microsoft/codeql-container) has been proposed by Microsoft.
+We use a forked CodeQL docker [image](https://github.com/bocherry/codeql-container-SMEAGOL) from the one proposed by Microsoft.
 
-You can install it via docker pull
+You can install it by building the container
 
-`$ docker pull mcr.microsoft.com/cstsectools/codeql-container`
-
-or by building the container
-
-<code>$ git clone https://github.com/microsoft/codeql-container
-cd codeql-container
-docker build . -f Dockerfile -t codeql-container</code>
+<code>git clone https://github.com/bocherry/codeql-container-SMEAGOL
+cd codeql-container-SMEAGOL
+docker build . -f Dockerfile -t codeql-container-SMEAGOL</code>
 
 To compile the project:
 
-`$ docker run --rm --name codeql-container -v path/to/project:/opt/src -v path/to/directoryDB:/opt/results -e CODEQL_CLI_ARGS="database create -l=javascript /opt/results/source_db -s /opt/src" mcr.microsoft.com/cstsectools/codeql-container`
+`$ docker run -v /path/to/project:/opt/src -v /path/to/directoryDB:/opt/codeqlDB -e CODEQL_CLI_ARGS="database create -l=javascript -s=/opt/src /opt/codeqlDB" codeql-container-SMEAGOL`
 
-where path/to/project is the filepath to your project and path/to/directoryDB is the directory where you want to place the codeql database of you project.
+where /path/to/project is your project directory and /path/to/directoryDB is the directory where you want to place the codeql database of you project.
 
 To run SMEAGOL:
 
-`docker run --rm --name codeql-container -v /path/to/directoryDB:/opt/src -v /path/to/results:/opt/results -v /path/to/smeagol_repository/src/SMEAGOL:/opt/SMEAGOL - v -v /path/to/smeagol_repository/packages:/opt/packages -e CODEQL_CLI_ARGS="database analyze --format=sarifv-latest --additional-packs=/opt/packages --output=/opt/results/SMEAGOL.sarif /opt/SMEAGOL" mcr.microsoft.com/cstsectools/codeql-container`
+`docker run -v /path/to/results:/opt/results -v /path/to/directoryDB:/opt/codeqlDB -e CODEQL_CLI_ARGS="database analyze --format=sarif-latest --additional-packs=/opt/SMEAGOL/packages --output=/opt/results/SMEAGOL.sarif /opt/codeqlDB /opt/SMEAGOL/src/SMEAGOL" codeql-container`
+
+where /path/to/results is the directory where you want to place the analysis result file which will be named `SMEAGOL.sarif` .
 
 ### VS code
 
@@ -63,5 +61,7 @@ Before using, you still need to compile your project, so refer to one of the abo
 Once CodeQL is setup and your project compiled, you can open the src folder in this repository.
 Install the [CodeQL extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-codeql) extension and go to the "QL" panel icon.
 In the "Database" section, select "From a folder" and select your compiled project.
-Then, under the "SMEAGOL" folder, right-click on the query you would like to run and select "Run Queries in Selected Files". You can also execute individual queries instead of all at once.
+
+Then, under the "SMEAGOL" folder, right-click on the query you would like to run and select "Run Queries in Selected Files".
+
 When the execution is over, you will see a panel with an alert message and hyperlinks to the localizations of the code smells.
