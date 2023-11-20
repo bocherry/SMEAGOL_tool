@@ -2,15 +2,39 @@
 
  <img src="SMEAGOL_logo.png" width="50%" />
 
-Companion repository of submission "SMEAGOL: MongoDB code smells static detection" for [SANER2024 Tool Demo Track](https://conf.researchr.org/track/saner-2024/saner-2024-tool-demo-track-)
+Companion repository of submission "SMEAGOL: A Static Code Smell Detector for MongoDB" for [SANER2024 Tool Demo Track](https://conf.researchr.org/track/saner-2024/saner-2024-tool-demo-track-)
 
 - [Source code](src/README.md)
-- [Code smells examples](examples/README.md)
 - [Definition and Detection rules](definitions/README.md)
+- [Code smells examples](examples/README.md)
 - [Evaluation data](evaluation/analysis.ipynb)
-- [Demo video](https://youtu.be/nIvk3uEfwOk)
+- [Demo video](https://youtu.be/vEYaDOjIw4I)
 
 ## Usage
+
+### Docker
+
+We use a forked CodeQL docker [image](https://github.com/bocherry/codeql-container-SMEAGOL) from the one proposed by Microsoft.
+
+For Windows environment, a [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) terminal is advised.
+
+You can install it by building the container
+
+<code>git clone https://github.com/bocherry/codeql-container-SMEAGOL
+cd codeql-container-SMEAGOL
+docker build . -f Dockerfile -t codeql-container-SMEAGOL</code>
+
+To compile the project:
+
+`$ docker run --rm -v /path/to/project:/opt/src -v /path/to/directoryDB:/opt/codeqlDB -e CODEQL_CLI_ARGS="database create -l=javascript -s=/opt/src /opt/codeqlDB" codeql-container-smeagol`
+
+where /path/to/project is your project directory and /path/to/directoryDB is an empty directory where you want to place the codeql database of you project.
+
+To run SMEAGOL:
+
+`$ docker run -v --rm /path/to/results:/opt/results -v /path/to/directoryDB:/opt/codeqlDB -e CODEQL_CLI_ARGS="database analyze --format=sarif-latest --additional-packs=/opt/SMEAGOL/packages --output=/opt/results/SMEAGOL.sarif /opt/codeqlDB /opt/SMEAGOL/src/SMEAGOL" codeql-container-smeagol`
+
+where /path/to/results is the directory where you want to place the analysis result file which will be named `SMEAGOL.sarif` .
 
 ### Locally
 
@@ -30,28 +54,6 @@ To execute SMEAGOL on your project, run:
 where path/to/result is the desired location the result file and path/to/SMEAGOL_too is the path to this repository.
 
 You can now open the sarif files, the instances detected lie in the _runs.results_ path
-
-### Docker
-
-We use a forked CodeQL docker [image](https://github.com/bocherry/codeql-container-SMEAGOL) from the one proposed by Microsoft.
-
-You can install it by building the container
-
-<code>git clone https://github.com/bocherry/codeql-container-SMEAGOL
-cd codeql-container-SMEAGOL
-docker build . -f Dockerfile -t codeql-container-SMEAGOL</code>
-
-To compile the project:
-
-`$ docker run -v /path/to/project:/opt/src -v /path/to/directoryDB:/opt/codeqlDB -e CODEQL_CLI_ARGS="database create -l=javascript -s=/opt/src /opt/codeqlDB" codeql-container-SMEAGOL`
-
-where /path/to/project is your project directory and /path/to/directoryDB is the directory where you want to place the codeql database of you project.
-
-To run SMEAGOL:
-
-`docker run -v /path/to/results:/opt/results -v /path/to/directoryDB:/opt/codeqlDB -e CODEQL_CLI_ARGS="database analyze --format=sarif-latest --additional-packs=/opt/SMEAGOL/packages --output=/opt/results/SMEAGOL.sarif /opt/codeqlDB /opt/SMEAGOL/src/SMEAGOL" codeql-container`
-
-where /path/to/results is the directory where you want to place the analysis result file which will be named `SMEAGOL.sarif` .
 
 ### VS code
 
