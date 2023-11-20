@@ -8,7 +8,7 @@ Companion repository of submission "SMEAGOL: A Static Code Smell Detector for Mo
 - [Definition and Detection rules](definitions/README.md)
 - [Code smells examples](examples/README.md)
 - [Evaluation data](evaluation/analysis.ipynb)
-- [Demo video](https://youtu.be/vEYaDOjIw4I)
+- [Demo video](https://youtu.be/h4Xbp9dIFt0)
 
 ## Usage
 
