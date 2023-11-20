@@ -8,6 +8,7 @@ Companion repository of submission "SMEAGOL: MongoDB code smells static detectio
 - [Code smells examples](examples/README.md)
 - [Definition and Detection rules](definitions/README.md)
 - [Evaluation data](evaluation/analysis.ipynb)
+- [Demo video](https://youtu.be/nIvk3uEfwOk)
 
 ## Usage
 
